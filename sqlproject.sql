@@ -52,6 +52,31 @@ CREATE TABLE Employees
     Salary DECIMAL(15,2)
 );
 
+CREATE TABLE Loans
+(
+    LoanID INT PRIMARY KEY NOT NULL,
+    CustomerID INT NOT NULL,
+    LoanType VARCHAR(50) NOT NULL,
+    --Determines the kind of loans recieved by the customer,
+    LoanAmount DECIMAL(15,2) NOT NULL,
+    InterestRate DECIMAL(15,2) not NULL,
+    StartDate DATE NOT NULL,
+    EndDate DATE not null,
+    Note VARCHAR(50),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+
+CREATE TABLE LoanRepayment
+(
+    PaymentID INT PRIMARY KEY NOT NULL,
+    LoanID INT NOT NULL,
+    PaymentDate DATE NOT NULL,
+    AmountPaid DECIMAL(15,2),
+    FOREIGN KEY (LoanID) REFERENCES Loans(LoanID)
+);
+
+
 INSERT INTO Customers
     (CustomerID, FirstName, LastName, DateOfBirth, Address, City, State, ZipCode, PhoneNumber, Email, JoinDate)
 VALUES
@@ -86,4 +111,155 @@ VALUES
     (29, 'Abby', 'Mitchell', '1995-05-29', '808 Pine St', 'Hometon', 'CA', '90990', '555-5678', 'abby.mitchell@example.com', '2024-01-29'),
     (30, 'Ben', 'Carter', '1987-06-30', '909 Cedar St', 'Townsville', 'TX', '10101', '555-9012', 'ben.carter@example.com', '2024-01-30');
 
-    
+INSERT INTO Accounts
+    (AccountID, CustomerID, AccountType, Balance, OpenDate, Note)
+VALUES
+    (1, 1, 'Checking', 1000.00, '2024-01-01', 'Active'),
+    (2, 1, 'Savings', 5000.00, '2024-01-01', 'Active'),
+    (3, 2, 'Checking', 2000.00, '2024-01-02', 'Active'),
+    (4, 3, 'Savings', 3000.00, '2024-01-03', 'Active'),
+    (5, 4, 'Checking', 1500.00, '2024-01-04', 'Active'),
+    (6, 5, 'Savings', 7000.00, '2024-01-05', 'Active'),
+    (7, 6, 'Checking', 800.00, '2024-01-06', 'Active'),
+    (8, 7, 'Savings', 9000.00, '2024-01-07', 'Active'),
+    (9, 8, 'Checking', 500.00, '2024-01-08', 'Active'),
+    (10, 9, 'Savings', 12000.00, '2024-01-09', 'Active'),
+    (11, 10, 'Checking', 2500.00, '2024-01-10', 'Active'),
+    (12, 11, 'Savings', 10000.00, '2024-01-11', 'Active'),
+    (13, 12, 'Checking', 3500.00, '2024-01-12', 'Active'),
+    (14, 13, 'Savings', 11000.00, '2024-01-13', 'Active'),
+    (15, 14, 'Checking', 4500.00, '2024-01-14', 'Active'),
+    (16, 15, 'Savings', 8000.00, '2024-01-15', 'Active'),
+    (17, 16, 'Checking', 5500.00, '2024-01-16', 'Active'),
+    (18, 17, 'Savings', 6000.00, '2024-01-17', 'Active'),
+    (19, 18, 'Checking', 200.00, '2024-01-18', 'Active'),
+    (20, 19, 'Savings', 3000.00, '2024-01-19', 'Active'),
+    (21, 20, 'Checking', 100.00, '2024-01-20', 'Active'),
+    (22, 21, 'Savings', 500.00, '2024-01-21', 'Active'),
+    (23, 22, 'Checking', 700.00, '2024-01-22', 'Active'),
+    (24, 23, 'Savings', 600.00, '2024-01-23', 'Active'),
+    (25, 24, 'Checking', 2000.00, '2024-01-24', 'Active'),
+    (26, 25, 'Savings', 1500.00, '2024-01-25', 'Active'),
+    (27, 26, 'Checking', 1000.00, '2024-01-26', 'Active'),
+    (28, 27, 'Savings', 2000.00, '2024-01-27', 'Active'),
+    (29, 28, 'Checking', 1200.00, '2024-01-28', 'Active'),
+    (30, 29, 'Savings', 900.00, '2024-01-29', 'Active');
+
+INSERT INTO Transactions
+    (TransactionsID, AccountID, TransactionType, TransactionDate, Amount, Comment)
+VALUES
+    (1, 1, 'Deposit', '2024-01-10', 200.00, 'Initial deposit'),
+    (2, 1, 'Withdrawal', '2024-01-15', 50.00, 'ATM withdrawal'),
+    (3, 2, 'Deposit', '2024-01-20', 300.00, 'Paycheck deposit'),
+    (4, 3, 'Withdrawal', '2024-01-25', 100.00, 'Bill payment'),
+    (5, 4, 'Deposit', '2024-01-30', 400.00, 'Direct deposit'),
+    (6, 5, 'Withdrawal', '2024-02-04', 200.00, 'Cash withdrawal'),
+    (7, 6, 'Deposit', '2024-02-09', 500.00, 'Bonus deposit'),
+    (8, 7, 'Withdrawal', '2024-02-14', 300.00, 'Online purchase'),
+    (9, 8, 'Deposit', '2024-02-19', 100.00, 'Gift deposit'),
+    (10, 9, 'Withdrawal', '2024-02-24', 400.00, 'Rent payment'),
+    (11, 10, 'Deposit', '2024-03-01', 600.00, 'Paycheck deposit'),
+    (12, 11, 'Withdrawal', '2024-03-06', 150.00, 'ATM withdrawal'),
+    (13, 12, 'Deposit', '2024-03-11', 200.00, 'Interest credit'),
+    (14, 13, 'Withdrawal', '2024-03-16', 100.00, 'Bill payment'),
+    (15, 14, 'Deposit', '2024-03-21', 300.00, 'Direct deposit'),
+    (16, 15, 'Withdrawal', '2024-03-26', 50.00, 'Cash withdrawal'),
+    (17, 16, 'Deposit', '2024-03-31', 400.00, 'Bonus deposit'),
+    (18, 17, 'Withdrawal', '2024-04-05', 200.00, 'Online purchase'),
+    (19, 18, 'Deposit', '2024-04-10', 500.00, 'Gift deposit'),
+    (20, 19, 'Withdrawal', '2024-04-15', 300.00, 'Rent payment'),
+    (21, 20, 'Deposit', '2024-04-20', 600.00, 'Paycheck deposit'),
+    (22, 21, 'Withdrawal', '2024-04-25', 100.00, 'ATM withdrawal'),
+    (23, 22, 'Deposit', '2024-04-30', 200.00, 'Interest credit'),
+    (24, 23, 'Withdrawal', '2024-05-05', 50.00, 'Bill payment'),
+    (25, 24, 'Deposit', '2024-05-10', 300.00, 'Direct deposit'),
+    (26, 25, 'Withdrawal', '2024-05-15', 150.00, 'Cash withdrawal'),
+    (27, 26, 'Deposit', '2024-05-20', 400.00, 'Bonus deposit'),
+    (28, 27, 'Withdrawal', '2024-05-25', 200.00, 'Online purchase'),
+    (29, 28, 'Deposit', '2024-05-30', 500.00, 'Gift deposit'),
+    (30, 29, 'Withdrawal', '2024-06-04', 300.00, 'Rent payment');
+
+
+INSERT INTO Employees
+    (EmployeeID, FirstName, LastName, DateOfBirth, HireDate, Position, Salary)
+VALUES
+    (1, 'Alice', 'Johnson', '1985-03-03', '2020-01-01', 'Manager', 60000.00),
+    (2, 'Bob', 'Williams', '1975-04-04', '2015-05-01', 'Teller', 40000.00),
+    (3, 'Carol', 'Davis', '1982-05-05', '2018-06-15', 'Developer', 50000.00),
+    (4, 'David', 'Smith', '1990-07-07', '2019-07-01', 'Analyst', 55000.00),
+    (5, 'Emma', 'Brown', '1988-08-08', '2021-08-01', 'Clerk', 35000.00),
+    (6, 'Frank', 'Jones', '1983-09-09', '2016-09-01', 'Supervisor', 58000.00),
+    (7, 'Grace', 'Miller', '1978-10-10', '2013-10-01', 'Consultant', 62000.00),
+    (8, 'Hank', 'Wilson', '1992-11-11', '2022-11-01', 'Assistant', 30000.00),
+    (9, 'Ivy', 'Moore', '1986-12-12', '2017-12-01', 'Coordinator', 47000.00),
+    (10, 'Jack', 'Taylor', '1981-01-01', '2014-01-01', 'Director', 70000.00);
+
+
+INSERT INTO Loans
+    (LoanID, CustomerID, LoanType, LoanAmount, InterestRate, StartDate, EndDate, Note)
+VALUES
+    (1, 1, 'Personal Loan', 10000.00, 5.00, '2024-01-01', '2026-01-01', 'Active'),
+    (2, 2, 'Home Loan', 200000.00, 3.50, '2024-02-01', '2034-02-01', 'Active'),
+    (3, 3, 'Auto Loan', 15000.00, 4.00, '2024-03-01', '2029-03-01', 'Active'),
+    (4, 4, 'Student Loan', 5000.00, 4.50, '2024-04-01', '2028-04-01', 'Active'),
+    (5, 5, 'Business Loan', 50000.00, 6.00, '2024-05-01', '2030-05-01', 'Active'),
+    (6, 6, 'Mortgage Loan', 250000.00, 3.75, '2024-06-01', '2044-06-01', 'Active'),
+    (7, 7, 'Payday Loan', 1000.00, 10.00, '2024-07-01', '2024-12-01', 'Active'),
+    (8, 8, 'Credit Card', 2000.00, 12.00, '2024-08-01', '2025-02-01', 'Active'),
+    (9, 9, 'Line of Credit', 5000.00, 5.00, '2024-09-01', '2026-09-01', 'Active'),
+    (10, 10, 'Equipment Loan', 7500.00, 4.75, '2024-10-01', '2028-10-01', 'Active'),
+    (11, 11, 'Construction Loan', 100000.00, 3.50, '2024-11-01', '2034-11-01', 'Active'),
+    (12, 12, 'Debt Consolidation Loan', 20000.00, 4.25, '2024-12-01', '2029-12-01', 'Active'),
+    (13, 13, 'Medical Loan', 15000.00, 6.50, '2025-01-01', '2030-01-01', 'Active'),
+    (14, 14, 'Travel Loan', 5000.00, 7.00, '2025-02-01', '2029-02-01', 'Active'),
+    (15, 15, 'Wedding Loan', 10000.00, 5.50, '2025-03-01', '2028-03-01', 'Active'),
+    (16, 16, 'Home Improvement Loan', 25000.00, 5.00, '2025-04-01', '2030-04-01', 'Active'),
+    (17, 17, 'Green Loan', 20000.00, 3.75, '2025-05-01', '2035-05-01', 'Active'),
+    (18, 18, 'Boat Loan', 30000.00, 4.25, '2025-06-01', '2032-06-01', 'Active'),
+    (19, 19, 'RV Loan', 45000.00, 4.50, '2025-07-01', '2031-07-01', 'Active'),
+    (20, 20, 'Farm Loan', 60000.00, 3.75, '2025-08-01', '2035-08-01', 'Active'),
+    (21, 21, 'Vacation Loan', 7000.00, 6.00, '2025-09-01', '2029-09-01', 'Active'),
+    (22, 22, 'Holiday Loan', 8000.00, 5.50, '2025-10-01', '2029-10-01', 'Active'),
+    (23, 23, 'Emergency Loan', 10000.00, 8.00, '2025-11-01', '2026-11-01', 'Active'),
+    (24, 24, 'Investment Loan', 150000.00, 4.00, '2025-12-01', '2040-12-01', 'Active'),
+    (25, 25, 'Relocation Loan', 5000.00, 5.00, '2026-01-01', '2028-01-01', 'Active'),
+    (26, 26, 'Technology Loan', 20000.00, 6.00, '2026-02-01', '2031-02-01', 'Active'),
+    (27, 27, 'Furniture Loan', 10000.00, 4.75, '2026-03-01', '2030-03-01', 'Active'),
+    (28, 28, 'Lease Buyout Loan', 15000.00, 5.25, '2026-04-01', '2029-04-01', 'Active'),
+    (29, 29, 'Secured Loan', 20000.00, 3.50, '2026-05-01', '2036-05-01', 'Active'),
+    (30, 30, 'Unsecured Loan', 10000.00, 7.00, '2026-06-01', '2029-06-01', 'Active');
+
+
+INSERT INTO LoanRepayment
+    (PaymentID, LoanID, PaymentDate, AmountPaid)
+VALUES
+    (1, 1, '2024-02-01', 500.00),
+    (2, 2, '2024-02-15', 1500.00),
+    (3, 3, '2024-03-01', 300.00),
+    (4, 4, '2024-03-15', 250.00),
+    (5, 5, '2024-04-01', 2000.00),
+    (6, 6, '2024-04-15', 2500.00),
+    (7, 7, '2024-05-01', 100.00),
+    (8, 8, '2024-05-15', 150.00),
+    (9, 9, '2024-06-01', 200.00),
+    (10, 10, '2024-06-15', 500.00),
+    (11, 11, '2024-07-01', 3000.00),
+    (12, 12, '2024-07-15', 400.00),
+    (13, 13, '2024-08-01', 500.00),
+    (14, 14, '2024-08-15', 200.00),
+    (15, 15, '2024-09-01', 1000.00),
+    (16, 16, '2024-09-15', 1250.00),
+    (17, 17, '2024-10-01', 750.00),
+    (18, 18, '2024-10-15', 900.00),
+    (19, 19, '2024-11-01', 1100.00),
+    (20, 20, '2024-11-15', 3000.00),
+    (21, 21, '2024-12-01', 350.00),
+    (22, 22, '2024-12-15', 400.00),
+    (23, 23, '2025-01-01', 200.00),
+    (24, 24, '2025-01-15', 3500.00),
+    (25, 25, '2025-02-01', 250.00),
+    (26, 26, '2025-02-15', 800.00),
+    (27, 27, '2025-03-01', 500.00),
+    (28, 28, '2025-03-15', 450.00),
+    (29, 29, '2025-04-01', 300.00),
+    (30, 30, '2025-04-15', 1000.00);
