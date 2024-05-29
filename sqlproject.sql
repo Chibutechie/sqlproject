@@ -305,3 +305,20 @@ CREATE TABLE LoanType
     LoanTypeName VARCHAR(50) NOT NULL,
     Comment VARCHAR(50)
 );
+
+INSERT INTO LoanType
+    (LoanTypeID, LoanTypeName, Comment)
+VALUES
+    (1, 'Personal Loan', 'Unsecured personal loan'),
+    (2, 'Mortgage Loan', 'Home mortgage loan'),
+    (3, 'Auto Loan', 'Loan for vehicle purchase'),
+    (4, 'Education Loan', 'Student education loan'),
+    (5, 'Business Loan', 'Small business loan'),
+    (6, 'Home Improvement Loan', 'Loan for home renovations'),
+    (7, 'Debt Consolidation Loan', 'Loan to consolidate debt'),
+    (8, 'Payday Loan', 'Short-term payday loan'),
+    (9, 'Credit Card Loan', 'Loan against credit card'),
+    (10, 'Medical Loan', 'Loan for medical expenses');
+
+
+
