@@ -368,3 +368,16 @@ FROM Customers;
 
 SELECT DISTINCT FirstName, LastName
 FROM Customers;
+
+
+CREATE VIEW TopLoaners
+AS
+    SELECT CustomerID, LoanAmount, InterestRate
+    FROM Loans
+    WHERE LoanAmount <= 100000 AND
+
+DROP
+
+SELECT *
+FROM TopLoaners
+
