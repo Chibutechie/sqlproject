@@ -276,4 +276,13 @@ SELECT
 FROM
     LoanRepayment;
 
-    
+
+SELECT
+    L.CustomerID,
+    SUM(LP.AmountPaid) AS TotalLoanCollected
+FROM
+    LoanRepayment LP
+    INNER JOIN
+    Loans L ON LP.LoanID = L.LoanID
+GROUP BY 
+    L.CustomerID;
