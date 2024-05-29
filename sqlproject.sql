@@ -266,3 +266,14 @@ VALUES
 
 
 USE CreditUDB
+
+SELECT *
+FROM Loans
+
+
+SELECT
+    SUM(AmountPaid) AS TotalLoanCollected
+FROM
+    LoanRepayment;
+
+    
