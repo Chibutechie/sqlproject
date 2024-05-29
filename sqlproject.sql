@@ -338,4 +338,21 @@ FROM
 GROUP BY 
     L.CustomerID
 ORDER BY
-    HighestLoanCollected DESC; -- This orders the results by the highest loan collected in descending order
+    HighestLoanCollected DESC;
+-- This orders the results by the highest loan collected in descending order
+
+
+CREATE VIEW CustomersWithHighestLoan
+AS
+    SELECT
+        C.CustomerID,
+        C.Address,
+        C.City,
+        MAX(L.LoanAmount) AS HighestLoanCollected
+    FROM
+        Customers C
+        INNER JOIN Loans L ON C.CustomerID = L.CustomerID
+    GROUP BY 
+    C.CustomerID,
+    C.Address,
+    C.City;
