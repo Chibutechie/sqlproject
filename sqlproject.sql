@@ -360,3 +360,11 @@ AS
 SELECT *
 FROM CustomersWithHighestLoan
 ORDER BY HighestLoanCollected DESC;
+
+USE CreditUDB;
+
+SELECT CustomerID, FirstName, LastName
+FROM Customers;
+
+SELECT DISTINCT FirstName, LastName
+FROM Customers;
