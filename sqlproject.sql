@@ -286,3 +286,22 @@ FROM
     Loans L ON LP.LoanID = L.LoanID
 GROUP BY 
     L.CustomerID;
+
+SELECT
+    LT.LoanType,
+    SUM(LP.AmountPaid) AS TotalLoanCollected
+FROM
+    LoanRepayment LP
+    INNER JOIN
+    Loans L ON LP.LoanID = L.LoanID
+    INNER JOIN
+    Loans LT ON L.LoanType = LT.LoanTypeID
+GROUP BY 
+    LT.LoanTypeName;
+
+CREATE TABLE LoanType
+(
+    LoanTypeID INT PRIMARY KEY NOT NULL,
+    LoanTypeName VARCHAR(50) NOT NULL,
+    Comment VARCHAR(50)
+);
