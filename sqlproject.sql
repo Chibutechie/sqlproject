@@ -329,3 +329,13 @@ FROM
     Loans L
 GROUP BY 
     L.CustomerID;
+
+SELECT
+    L.CustomerID AS ID,
+    MAX(L.LoanAmount) AS HighestLoanCollected
+FROM
+    Loans L
+GROUP BY 
+    L.CustomerID
+ORDER BY
+    HighestLoanCollected DESC; -- This orders the results by the highest loan collected in descending order
