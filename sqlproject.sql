@@ -287,17 +287,6 @@ FROM
 GROUP BY 
     L.CustomerID;
 
-SELECT
-    LT.LoanType,
-    SUM(LP.AmountPaid) AS TotalLoanCollected
-FROM
-    LoanRepayment LP
-    INNER JOIN
-    Loans L ON LP.LoanID = L.LoanID
-    INNER JOIN
-    Loans LT ON L.LoanType = LT.LoanTypeID
-GROUP BY 
-    LT.LoanTypeName;
 
 CREATE TABLE LoanType
 (
@@ -320,5 +309,23 @@ VALUES
     (9, 'Credit Card Loan', 'Loan against credit card'),
     (10, 'Medical Loan', 'Loan for medical expenses');
 
+SELECT
+    LT.LoanTypeName,
+    SUM(LP.AmountPaid) AS TotalLoanCollected
+FROM
+    LoanRepayment LP
+    INNER JOIN
+    Loans L ON LP.LoanID = L.LoanID
+    INNER JOIN
+    LoanType LT ON L.LoanType = LT.LoanTypeID
+GROUP BY 
+    LT.LoanTypeName;
 
 
+SELECT
+    L.CustomerID AS ID,
+    MAX(L.LoanAmount) AS HighestLoanCollected
+FROM
+    Loans L
+GROUP BY 
+    L.CustomerID;
