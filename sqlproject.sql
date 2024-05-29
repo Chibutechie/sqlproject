@@ -356,3 +356,7 @@ AS
     C.CustomerID,
     C.Address,
     C.City;
+
+SELECT *
+FROM CustomersWithHighestLoan
+ORDER BY HighestLoanCollected DESC;
