@@ -399,6 +399,13 @@ USE CreditUDB;
 Select *
 from Customers
 
-SELECT CONCAT(FirstName, ' ', LastName) AS FullName
+CREATE VIEW CustomerDetail AS
+SELECT 
+    CustomerID,
+    CONCAT(FirstName, ' ', LastName) AS FullName,
+    PhoneNumber,
+    Email
 FROM Customers;
 
+SELECT *
+FROM
