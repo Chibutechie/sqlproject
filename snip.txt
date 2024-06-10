@@ -1,3 +1,14 @@
+--how to know the session_id of your db
 SELECT session_id, host_name, program_name, login_name
 FROM sys.dm_exec_sessions
 WHERE database_id = DB_ID('StoreDB');
+
+
+---creating a VIEW table with CONCAT
+CREATE VIEW CustomerDetail AS
+SELECT 
+    CustomerID,
+    CONCAT(FirstName, ' ', LastName) AS FullName,
+    PhoneNumber,
+    Email
+FROM Customers;

@@ -408,4 +408,17 @@ SELECT
 FROM Customers;
 
 SELECT *
-FROM
+FROM CustomerDetail
+
+SELECT DISTINCT CustomerID, FullName
+FROM CustomerDetail;
+
+USE CreditUDB
+
+select JoinDate
+from customers
+
+select *
+from Customers
+where JoinDate BETWEEN '2024-01-28' and '2024-01-30';
+
