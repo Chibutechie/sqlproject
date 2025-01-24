@@ -464,7 +464,7 @@ WHERE AccountID = 1;
 
 SELECT * FROM Customers;
 
-
+--- changing the numbering format for Transactions
 WITH NumberedTransactions AS (
     SELECT 
         ROW_NUMBER() OVER (ORDER BY TransactionDate) AS RowNum, 
@@ -475,4 +475,23 @@ SELECT
     RIGHT('000' + CAST(RowNum AS VARCHAR), 3) AS NewTransactionID, 
     TransactionsID
 FROM NumberedTransactions
-WHERE RowNum <= 29;
+WHERE RowNum <= 29; 
+
+SELECT * FROM Accounts;
+
+--- changing the numbering format for Accounts
+WITH NumberedAccounts AS (
+    SELECT 
+        ROW_NUMBER() OVER (ORDER BY TransactionDate) AS RowNum, 
+        AccountID
+    FROM Transactions
+)
+SELECT 
+    RIGHT('000' + CAST(RowNum AS VARCHAR), 3) AS AccountID, 
+    AccountID
+FROM NumberedAccounts
+WHERE RowNum <= 29; 
+
+SELECT * FROM Accounts;
+
+
