@@ -399,13 +399,14 @@ USE CreditUDB;
 Select *
 from Customers
 
-CREATE VIEW CustomerDetail AS
-SELECT 
-    CustomerID,
-    CONCAT(FirstName, ' ', LastName) AS FullName,
-    PhoneNumber,
-    Email
-FROM Customers;
+CREATE VIEW CustomerDetail
+AS
+    SELECT
+        CustomerID,
+        CONCAT(FirstName, ' ', LastName) AS FullName,
+        PhoneNumber,
+        Email
+    FROM Customers;
 
 SELECT *
 FROM CustomerDetail
@@ -431,3 +432,16 @@ from CustomerDetail
 where FullName like '[b,s,p]%'
 
 USE CreditUDB
+
+
+select *
+from Customers
+
+SELECT TOP 10
+    *
+FROM Customers
+WHERE State in ('CA');
+
+
+select *
+from Customers
