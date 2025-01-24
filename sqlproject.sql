@@ -443,5 +443,36 @@ FROM Customers
 WHERE State in ('CA');
 
 
-select *
-from Customers
+select * from Customers
+where State = 'CA';
+
+USE CreditUDB;
+
+-- Delete all transactions for AccountID = 1 except the first one
+DELETE FROM Transactions
+WHERE AccountID = 1 AND TransactionsID <> 1;
+
+SELECT * FROM Transactions;
+
+SELECT * FROM Accounts;
+
+DELETE FROM Accounts
+WHERE AccountID = 1 AND CustomerID <> 1;
+
+SELECT * FROM Accounts
+WHERE AccountID = 1;
+
+SELECT * FROM Customers;
+
+
+WITH NumberedTransactions AS (
+    SELECT 
+        ROW_NUMBER() OVER (ORDER BY TransactionDate) AS RowNum, 
+        TransactionsID
+    FROM Transactions
+)
+SELECT 
+    RIGHT('000' + CAST(RowNum AS VARCHAR), 3) AS NewTransactionID, 
+    TransactionsID
+FROM NumberedTransactions
+WHERE RowNum <= 29;
