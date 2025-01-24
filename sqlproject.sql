@@ -422,3 +422,12 @@ select *
 from Customers
 where JoinDate BETWEEN '2024-01-28' and '2024-01-30';
 
+select *
+from Customers
+where City IN ('Anytown', 'Smalltown');
+
+select *
+from CustomerDetail
+where FullName like '[b,s,p]%'
+
+USE CreditUDB
