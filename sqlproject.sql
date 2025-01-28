@@ -494,4 +494,31 @@ WHERE RowNum <= 29;
 
 SELECT * FROM Accounts;
 
+USE CreditUDB
+
+--- updating the transaction table to have the new number format --- I was assisted with Chatgpt to do this part. 
+
+ALTER TABLE Transactions ADD NewTransactionID VARCHAR(3);
+
+WITH NumberedTransactions AS (
+    SELECT 
+        ROW_NUMBER() OVER (ORDER BY TransactionDate) AS RowNum, 
+        TransactionsID
+    FROM Transactions
+)
+UPDATE Transactions
+SET NewTransactionID = RIGHT('000' + CAST(N.RowNum AS VARCHAR(10)), 3)
+FROM Transactions T
+INNER JOIN NumberedTransactions N
+    ON T.TransactionsID = N.TransactionsID
+WHERE N.RowNum <= 29;
+
+SELECT * FROM Transactions;
+
+ALTER TABLE Transactions
+DROP COLUMN TransactionsID; 
+
+use CreditUDB;
+
+select * from Customers;
 
